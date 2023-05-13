@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import DrawCardsForm from './DrawCardsForm.js';
+import Card from './Card.js';
 import './App.css';
 import { func } from 'prop-types';
 
@@ -22,7 +23,7 @@ function App() {
       setDeck(drawCards);
       // console.log(drawCards);
       drawCards.data.success
-        ? setDisplayedCards([...displayedCards, ...drawCards.data.cards.map(card => ({ id: drawCards.data.remaining, image: card.image }))])
+        ? setDisplayedCards([...displayedCards, ...drawCards.data.cards.map(card => ({ id: drawCards.data.remaining, image: card.image, style: { width: 200, marginLeft: 10, marginRight: 10, transform: `rotate(${randDeg()}deg)` } }))])
         : alert("No more cards!");
     }
     drawCards();
@@ -39,14 +40,14 @@ function App() {
   }
 
   const randDeg = () => {
-    const rand = Math.floor(Math.random() * 60 - 30);
+    const rand = Math.floor(Math.random() * 70 - 30);
     return rand;
   }
 
   return (
     <div className="App">
       <DrawCardsForm deck={deck} draw={draw} shuffle={shuffle} />
-      {displayedCards.map(({ id, image }) => <img key={id} src={image} style={{ width: 100, marginLeft: 10, marginRight: 10, transform: `rotate(${randDeg()}deg)` }}></img>)}
+      {displayedCards.map(({ id, image, style }) => <Card key={id} src={image} style={style} />)}
     </div>
   );
 }
