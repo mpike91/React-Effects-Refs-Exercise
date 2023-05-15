@@ -23,7 +23,7 @@ function App() {
       setDeck(drawCards);
       // console.log(drawCards);
       drawCards.data.success
-        ? setDisplayedCards([...displayedCards, ...drawCards.data.cards.map(card => ({ id: drawCards.data.remaining, image: card.image, style: { width: 200, marginLeft: 10, marginRight: 10, transform: `rotate(${randDeg()}deg)` } }))])
+        ? setDisplayedCards([...displayedCards, ...drawCards.data.cards.map(card => ({ id: drawCards.data.remaining, image: card.image, style: { width: 200, transform: `rotate(${randDeg()}deg)` } }))])
         : alert("No more cards!");
     }
     drawCards();
